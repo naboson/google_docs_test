@@ -23,14 +23,14 @@ wordApp.controller('wordCtrl', ['$scope', '$window', function($scope, $window) {
 		'pdf': 'https://docs.google.com/gview?url=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.pdf&embedded=true'
 	};
 
-	$scope.open(type) {
+	$scope.open = function(type) {
 		url = dict[type];
 		$('#myFrame').attr('src', url);
-	}
+	};
 
-	$scope.close() {
+	$scope.close = function() {
 		$('#myFrame.').attr('src', '');
-	}
+	};
 }]);
 
 </script>
