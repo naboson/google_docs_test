@@ -24,6 +24,7 @@ wordApp.controller('wordCtrl', ['$scope', '$window', function($scope, $window) {
 	};
 
 	$scope.open = function(type) {
+		$scope.close();
 		url = dict[type];
 		$('#myFrame').attr('src', url);
 	};
