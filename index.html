@@ -3,21 +3,92 @@
 	<title>test</title>
 	<style>
 		iframe {
-			width: 600px;
+			width: 550px;
 			height: 400px;
 		}
-	</style>
 
+		#type_div {
+			padding: 10px 10px 10px 10px;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
 
-<div>
-	<h3><a href="word.html">Word</a></h3>
-	<h3><a href="excel.html">Excel</a></h3>
-	<h3><a href="powerpoint.html">PowerPoint</a></h3>
-	<h3><a href="pdf.html">PDF</a></h3>
-	<h3><a href="others.html">Others</a></h3>
+<script>
+var wordApp = angular.module('wordApp', []);
+wordApp.controller('wordCtrl', ['$scope', '$window', function($scope, $window) { 
+
+	var dict = {
+		'doc': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.doc',
+		'docx': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.docx',
+		'word-pdf': 'https://docs.google.com/gview?url=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.pdf&embedded=true',
+		'xls': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/pre-survey-table.xls',
+		'xlsx': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/pre-survey-table.xlsx',
+		'excel-pdf': 'https://docs.google.com/gview?url=https://s3-ap-southeast-1.amazonaws.com/cckm-test/pre-survey-table.pdf&embedded=true',
+		'ppt': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/git.ppt',
+		'pptx': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/git.pptx',
+		'ppt-pdf': 'https://docs.google.com/gview?url=https://s3-ap-southeast-1.amazonaws.com/cckm-test/git.pdf&embedded=true',
+		'jpg': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/car.jpg',
+		'png': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/money.png'
+	};
+
+	$scope.open = function(type) {
+		url = dict[type];
+		$('#myFrame').attr('src', url);
+	};
+
+	$scope.close = function() {
+		$('#myFrame').attr('src', '');
+	};
+}]);
+
+</script>
+
+<div ng-app="wordApp" ng-controller="wordCtrl" id="controller">
+	<div class="container">
+		<h2>各種檔案格式預覽：</h2>
+		<div class="well">
+			<button class='btn btn-primary' ng-click="open('doc')" data-toggle="modal" data-target="#preview_modal">doc</button>
+			<button class='btn btn-primary' ng-click="open('docx')" data-toggle="modal" data-target="#preview_modal">docx</button>
+			<button class='btn btn-primary' ng-click="open('word-pdf')" data-toggle="modal" data-target="#preview_modal">word pdf</button>
+		</div>
+		<div class="well">	
+			<button class='btn btn-primary' ng-click="open('xls')" data-toggle="modal" data-target="#preview_modal">xls</button>
+			<button class='btn btn-primary' ng-click="open('xlsx')" data-toggle="modal" data-target="#preview_modal">xlsx</button>
+			<button class='btn btn-primary' ng-click="open('excel-pdf')" data-toggle="modal" data-target="#preview_modal">excel pdf</button>
+		</div>
+		<div class="well">
+			<button class='btn btn-primary' ng-click="open('ppt')" data-toggle="modal" data-target="#preview_modal">ppt</button>
+			<button class='btn btn-primary' ng-click="open('pptx')" data-toggle="modal" data-target="#preview_modal">pptx</button>
+			<button class='btn btn-primary' ng-click="open('ppt-pdf')" data-toggle="modal" data-target="#preview_modal">ppt pdf</button>
+		</div>
+
+		<div class="modal fade" id="preview_modal" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                    <h4 class="modal-title">檔案內容預覽</h4>
+					</div>
+					<div class="modal-body">
+						<p>test</p>
+						<iframe id="myFrame" src=""></iframe>
+					</div>
+					<div class="modal-footer">
+						<button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">關閉</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 
 </body>
 </html>
