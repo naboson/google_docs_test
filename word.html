@@ -7,21 +7,59 @@
 			height: 400px;
 		}
 	</style>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
+
+<script>
+var wordApp = angular.module('wordApp', []);
+wordApp.controller('wordCtrl', ['$scope', '$window', function($scope, $window) { 
+
+	var dict = {
+		'doc': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.doc',
+		'docx': 'https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.docx',
+		'pdf': 'https://docs.google.com/gview?url=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.pdf&embedded=true'
+	};
+
+	$scope.open(type) {
+		url = dict[type];
+		$('#myFrame').attr('src', url);
+	}
+
+	$scope.close() {
+		$('#myFrame.').attr('src', '');
+	}
+}]);
+
+</script>
+
+<div>
+	<button class='btn btn-primary btn-xs' ng-click="open('doc')">doc</button>
+	<button class='btn btn-primary btn-xs' ng-click="open('docx')">docx</button>
+	<button class='btn btn-primary btn-xs' ng-click="open('pdf')">pdf</button>
+</div>
+
+
+<hr/>
 
 <div>
 	<h1>1. doc</h1>
 	<p><a href="https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.doc" target="_blank">download</a></p>
-	<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.doc'></iframe>
+	<!--<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.doc'></iframe>-->
 </div>
 
 <div>
 	<h1>2. docx</h1>
 	<p><a href="https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.docx" target="_blank">download</a></p>
-	<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.docx'></iframe>
+	<!--<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://s3-ap-southeast-1.amazonaws.com/cckm-test/labor.docx'></iframe>-->
 </div>
 
+<div>
+	<h1></h1>
+	<iframe id="myFrame" src=""></iframe>
+</div>
 
 
 
